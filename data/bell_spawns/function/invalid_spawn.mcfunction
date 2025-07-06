@@ -9,13 +9,28 @@ execute store result entity @e[tag=bell_spawns_player_position,limit=1] Pos[1] d
 execute store result entity @e[tag=bell_spawns_player_position,limit=1] Pos[2] double 1.0 \
    run scoreboard players get @s player_spawn_z
 
-execute at @e[tag=bell_spawn_marker,sort=nearest,limit=1] \
+execute at @e[tag=bell_spawn_marker,limit=1] \
+   if score @s player_spawn_dimension matches 0 in minecraft:overworld \
    unless score @s player_spawn_x matches -999999999.. \
    unless score @s player_spawn_y matches -999999999.. \
    unless score @s player_spawn_z matches -999999999.. \
    run spawnpoint @s ~ ~ ~
 
-execute at @e[tag=bell_spawn_marker,sort=nearest,limit=1] if score @s player_spawn_x matches -999999999.. \
+execute at @e[tag=bell_spawn_marker,limit=1] \
+   if score @s player_spawn_dimension matches 1 in minecraft:the_nether \
+   unless score @s player_spawn_x matches -999999999.. \
+   unless score @s player_spawn_y matches -999999999.. \
+   unless score @s player_spawn_z matches -999999999.. \
+   run spawnpoint @s ~ ~ ~
+
+execute at @e[tag=bell_spawn_marker,limit=1] \
+   if score @s player_spawn_dimension matches 2 in minecraft:the_end \
+   unless score @s player_spawn_x matches -999999999.. \
+   unless score @s player_spawn_y matches -999999999.. \
+   unless score @s player_spawn_z matches -999999999.. \
+   run spawnpoint @s ~ ~ ~
+
+execute at @e[tag=bell_spawn_marker,limit=1] if score @s player_spawn_x matches -999999999.. \
    if score @s player_spawn_y matches -999999999.. \
    if score @s player_spawn_z matches -999999999.. \
    at @e[tag=bell_spawns_player_position,limit=1] \
